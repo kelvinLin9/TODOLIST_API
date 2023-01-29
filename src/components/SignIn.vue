@@ -11,7 +11,7 @@
         <VField id="email" name="email" type="email" class="form-control"
               :class="{ 'is-invalid': errors['email'] }"
               placeholder="請輸入 Email" rules="email|required"
-              v-model="email">
+              v-model="signInForm.email">
         </VField>
         <ErrorMessage name="email" class="invalid-feedback"/>
       </div>
@@ -22,7 +22,7 @@
         <VField id="password" name="密碼" type="password" class="form-control"
               :class="{ 'is-invalid': errors['密碼'] }"
               placeholder="請輸入密碼" rules="required|min:8"
-              v-model="password">
+              v-model="signInForm.password">
         </VField>
         <ErrorMessage name="密碼" class="invalid-feedback"/>
       </div>
@@ -47,7 +47,7 @@ import signStore from '@/stores/signStore'
 export default {
   computed: {
     ...mapState(signStore, []),
-    ...mapWritableState(signStore, ['email', 'nickname', 'password', 'isSignIn'])
+    ...mapWritableState(signStore, ['signInForm', 'isSignIn'])
   },
   methods: {
     ...mapActions(signStore, ['signIn'])
