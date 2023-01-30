@@ -14,7 +14,8 @@ export default defineStore('signStore', {
       password: '',
       password2: ''
     },
-    isSignIn: true
+    isSignIn: true,
+    token: ''
   }),
   actions: {
     signIn () {
@@ -28,8 +29,11 @@ export default defineStore('signStore', {
       })
         .then((res) => {
           console.log(res)
+          console.log(res.headers.authorization)
+          this.token = res.headers.authorization
           this.signInForm.email = ''
           this.signInForm.password = ''
+          this.getTodos()
           router.push('/ToDoList')
         }).catch((err) => {
           console.log(err)
@@ -61,6 +65,35 @@ export default defineStore('signStore', {
       } else {
         alert('兩次密碼必須相同')
       }
+    },
+    signOut () {
+      const api = `${apiUrl}/users/sign_out`
+      axios.delete(api, {
+        headers: {
+          Authorization: this.token
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          router.push('/')
+        }).catch((err) => {
+          console.log(err)
+          alert('QQ')
+        })
+    },
+    getTodos () {
+      const api = `${apiUrl}/todos`
+      axios.get(api, {
+        headers: {
+          Authorization: this.token
+        }
+      })
+        .then((res) => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+          alert('QQ')
+        })
     }
   }
 })
