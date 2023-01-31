@@ -34,7 +34,7 @@ export default defineStore('signStore', {
           this.token = res.headers.authorization
           this.signInForm.email = ''
           this.signInForm.password = ''
-          this.getTodos()
+          // this.getTodos()
           router.push('/ToDoList')
         }).catch((err) => {
           console.log(err)
@@ -91,9 +91,10 @@ export default defineStore('signStore', {
       })
         .then((res) => {
           console.log(res.data.todos)
+          this.todos = res.data.todos
         }).catch((err) => {
           console.log(err)
-          alert('QQ')
+          router.push('/')
         })
     }
   }

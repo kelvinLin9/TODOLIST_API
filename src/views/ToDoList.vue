@@ -20,12 +20,17 @@
     </ul>
     <div class="cart_content">
       <ul class="list">
-        <li>
-          <label class="checkbox" for="">
+        <li v-for="item in todos" :key="item.id">
+          <label class="checkbox" for="" @click="toggleTodo(item.id)">
             <input type="checkbox" />
-            <span>{{ todos }}</span>
+            <span>{{ item.content }}</span>
           </label>
-          <a href="#" class="delete"></a>
+          <a href="#" class="edit" @click.prevent="editTodo(item.id)">
+            <font-awesome-icon icon="fa-solid fa-user-secret" />
+          </a>
+          <a href="#" class="delete" @click.prevent="deleteTodo(item.id)">
+            <font-awesome-icon icon="fa-solid fa-user-secret" />
+          </a>
         </li>
       </ul>
       <div class="list_footer">
@@ -48,10 +53,11 @@ export default {
     ...mapWritableState(signStore, ['todos'])
   },
   methods: {
-    ...mapActions(todoStore, ['addTodo']),
-    ...mapActions(signStore, ['signOut'])
+    ...mapActions(todoStore, ['addTodo', 'editTodo', 'deleteTodo', 'toggleTodo']),
+    ...mapActions(signStore, ['signOut', 'getTodos'])
   },
   created () {
+    this.getTodos()
   }
 }
 </script>
