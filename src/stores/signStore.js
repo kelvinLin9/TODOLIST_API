@@ -15,6 +15,7 @@ export default defineStore('signStore', {
       password2: ''
     },
     isSignIn: true,
+    userNickname: '',
     token: '',
     todos: []
   }),
@@ -34,6 +35,7 @@ export default defineStore('signStore', {
           this.token = res.headers.authorization
           this.signInForm.email = ''
           this.signInForm.password = ''
+          this.userNickname = res.data.nickname
           // this.getTodos()
           router.push('/ToDoList')
         }).catch((err) => {

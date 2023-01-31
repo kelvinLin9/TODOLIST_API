@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex test mb-5">
       <img src="../assets/images/logo.png" alt="">
-      <h1 class="ms-auto">{{ }}的待辦</h1>
+      <h1 class="ms-auto fs-16">{{ userNickname }}的待辦</h1>
       <button class="btn" @click="signOut">登出</button>
     </div>
     <div class="card input">
@@ -50,7 +50,7 @@ import todoStore from '@/stores/todoStore'
 export default {
   computed: {
     ...mapWritableState(todoStore, ['todo']),
-    ...mapWritableState(signStore, ['todos'])
+    ...mapWritableState(signStore, ['todos', 'userNickname'])
   },
   methods: {
     ...mapActions(todoStore, ['addTodo', 'editTodo', 'deleteTodo', 'toggleTodo']),
