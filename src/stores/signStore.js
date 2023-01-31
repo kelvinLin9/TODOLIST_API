@@ -15,7 +15,8 @@ export default defineStore('signStore', {
       password2: ''
     },
     isSignIn: true,
-    token: ''
+    token: '',
+    todos: []
   }),
   actions: {
     signIn () {
@@ -89,7 +90,7 @@ export default defineStore('signStore', {
         }
       })
         .then((res) => {
-          console.log(res)
+          console.log(res.data.todos)
         }).catch((err) => {
           console.log(err)
           alert('QQ')

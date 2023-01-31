@@ -6,8 +6,11 @@
       <button class="btn" @click="signOut">登出</button>
     </div>
     <div class="card input">
-      <input class="text" type="text" placeholder="請輸入待辦事項" />
-      <button class="btn btn_add">+</button>
+      <input class="text"
+              type="text"
+              placeholder="請輸入待辦事項"
+              v-model="todo" />
+      <button class="btn btn_add" @click="addTodo">+</button>
     </div>
     <div class="card card_list">
     <ul class="tab">
@@ -17,34 +20,13 @@
     </ul>
     <div class="cart_content">
       <ul class="list">
-        <!-- <li>
-                <label class="checkbox" for="">
-                  <input type="checkbox" />
-                  <span>丟</span>
-                </label>
-                <a href="#" class="delete"></a>
-              </li>
-              <li>
-                <label class="checkbox" for="">
-                  <input type="checkbox" />
-                  <span>去丟</span>
-                </label>
-                <a href="#" class="delete"></a>
-              </li>
-              <li>
-                <label class="checkbox" for="">
-                  <input type="checkbox" />
-                  <span>拿去丟</span>
-                </label>
-                <a href="#" class="delete"></a>
-              </li>
-              <li>
-                <label class="checkbox" for="">
-                  <input type="checkbox" />
-                  <span>檸檬拿去丟</span>
-                </label>
-                <a href="#" class="delete"></a>
-              </li> -->
+        <li>
+          <label class="checkbox" for="">
+            <input type="checkbox" />
+            <span>{{ todos }}</span>
+          </label>
+          <a href="#" class="delete"></a>
+        </li>
       </ul>
       <div class="list_footer">
         <p><span class="todoLength">0</span> 個待完成項目</p>
@@ -62,15 +44,14 @@ import todoStore from '@/stores/todoStore'
 
 export default {
   computed: {
-    ...mapWritableState(todoStore, [''])
+    ...mapWritableState(todoStore, ['todo']),
+    ...mapWritableState(signStore, ['todos'])
   },
   methods: {
-    ...mapActions(todoStore, ['getTodos']),
+    ...mapActions(todoStore, ['addTodo']),
     ...mapActions(signStore, ['signOut'])
   },
   created () {
-    // console.log(123)
-    // this.getTodos()
   }
 }
 </script>
