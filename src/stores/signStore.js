@@ -16,8 +16,7 @@ export default defineStore('signStore', {
     },
     isSignIn: true,
     userNickname: '',
-    token: '',
-    todos: []
+    token: ''
   }),
   actions: {
     signIn () {
@@ -82,21 +81,6 @@ export default defineStore('signStore', {
         }).catch((err) => {
           console.log(err)
           alert('QQ')
-        })
-    },
-    getTodos () {
-      const api = `${apiUrl}/todos`
-      axios.get(api, {
-        headers: {
-          Authorization: this.token
-        }
-      })
-        .then((res) => {
-          console.log(res.data.todos)
-          this.todos = res.data.todos
-        }).catch((err) => {
-          console.log(err)
-          router.push('/')
         })
     }
   }

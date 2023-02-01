@@ -1,8 +1,9 @@
 <template>
-  <div class="container">
-    <div class="d-flex test mb-5">
-      <img src="../assets/images/logo.png" alt="">
-      <h1 class="ms-auto fs-16">{{ userNickname }}的待辦</h1>
+<div class="bg-main">
+  <div class="p-5 todo">
+    <div class="d-flex justify-content-center align-items-center mb-5">
+      <img src="../assets/images/logo.png" alt="logo">
+      <div class="ms-auto fs-16">{{ userNickname }}的待辦</div>
       <button class="btn" @click="signOut">登出</button>
     </div>
     <div class="card input">
@@ -13,33 +14,37 @@
       <button class="btn btn_add" @click="addTodo">+</button>
     </div>
     <div class="card card_list">
-    <ul class="tab">
-      <li data-tab="all" class="active">全部</li>
-      <li data-tab="work">待完成</li>
-      <li data-tab="down">已完成</li>
+    <ul class="tab" @click="getTodos()">
+      <li  :class="{active : todoStatus === 'all'}"
+            @click="todoStatus = 'all'">全部</li>
+      <li  :class="{active : todoStatus === 'work'}"
+            @click="todoStatus = 'work'">待完成</li>
+      <li  :class="{active : todoStatus === 'down'}"
+            @click="todoStatus = 'down'">已完成</li>
     </ul>
     <div class="cart_content">
       <ul class="list">
-        <li v-for="item in todos" :key="item.id">
+        <li v-for="item in afterFilterTodos" :key="item.id">
           <label class="checkbox" for="" @click="toggleTodo(item.id)">
             <input type="checkbox" />
             <span>{{ item.content }}</span>
           </label>
           <a href="#" class="edit" @click.prevent="editTodo(item.id)">
-            <font-awesome-icon icon="fa-solid fa-user-secret" />
+            <font-awesome-icon icon="fa-solid fa-pen" />
           </a>
           <a href="#" class="delete" @click.prevent="deleteTodo(item.id)">
-            <font-awesome-icon icon="fa-solid fa-user-secret" />
+            <font-awesome-icon icon="fa-solid fa-trash" />
           </a>
         </li>
       </ul>
       <div class="list_footer">
-        <p><span class="todoLength">0</span> 個待完成項目</p>
-        <a href="#" class="btn_clear">清除已完成項目</a>
+        <p><span class="todoLength">{{ works }}</span> 個待完成項目</p>
+        <a href="#" class="btn_clear" @click.prevent="clearDowns()">清除已完成項目</a>
       </div>
     </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -49,12 +54,12 @@ import todoStore from '@/stores/todoStore'
 
 export default {
   computed: {
-    ...mapWritableState(todoStore, ['todo']),
-    ...mapWritableState(signStore, ['todos', 'userNickname'])
+    ...mapWritableState(todoStore, ['todo', 'afterFilterTodos', 'todoStatus', 'works']),
+    ...mapWritableState(signStore, ['userNickname'])
   },
   methods: {
-    ...mapActions(todoStore, ['addTodo', 'editTodo', 'deleteTodo', 'toggleTodo']),
-    ...mapActions(signStore, ['signOut', 'getTodos'])
+    ...mapActions(todoStore, ['getTodos', 'addTodo', 'editTodo', 'deleteTodo', 'toggleTodo', 'clearDowns']),
+    ...mapActions(signStore, ['signOut'])
   },
   created () {
     this.getTodos()
@@ -68,7 +73,7 @@ export default {
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -89,7 +94,7 @@ font: inherit;
 vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
+/* article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 display: block;
 }
@@ -113,11 +118,11 @@ border-spacing: 0;
 }
 * , *:befor , *:after  {
 box-sizing: border-box;
-}
+/* }  */
 
-@import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
-@import url("https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700");
-* {
+/* @import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
+@import url("https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700"); */
+/* * {
   box-sizing: border-box;
 }
 
@@ -126,16 +131,11 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-boo {
-  min-height: 100vh;
-  background: #eee;
-  display: flex;
-  color: #333;
-  background-image: linear-gradient(174deg, #ffd370 2%, #ffd370 46%, #ffffff 46%, #ffffff 100%, #e8e8e8 100%);
-  letter-spacing: 0.07em;
-}
+.todo {
+  max-width: 1280px;
+} */
 
-h1 {
+/* h1 {
   text-align: center;
   font-size: 3rem;
   margin-bottom: 1.5rem;
@@ -148,18 +148,7 @@ h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-}
-
-.container {
-  margin: 3rem auto 1.5rem auto;
-  padding: 0 12px;
-  width: 500px;
-}
-@media (max-width: 575px) {
-  .container {
-    margin-top: 1.5rem;
-  }
-}
+} */
 
 .card {
   margin-bottom: 0.5rem;

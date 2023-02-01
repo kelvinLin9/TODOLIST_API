@@ -13,12 +13,12 @@ import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 const app = createApp(App)
 const pinia = createPinia()
 
-library.add(faUserSecret)
+library.add(fas)
 
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule])
