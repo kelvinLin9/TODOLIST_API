@@ -1,12 +1,16 @@
 <template>
   <div class="bg-login vh-100 d-flex align-items-center test">
-    <div class="container test py-5">
+    <div class="container py-5">
       <div class="row">
-        <div class="col d-flex flex-column justify-content-center align-items-center">
-          <h1 class="fs-32">ONLINE TODO LIST</h1>
-          <img src="../assets/images/login.png" alt="">
+        <div class="col d-none d-md-block">
+          <div class="logo container text-center">
+            <img src="../assets/images/logo.png" alt="logo">
+          </div>
+          <div class="">
+            <img src="../assets/images/login.png" alt="login-image">
+          </div>
         </div>
-        <div class="col d-flex justify-content-center test">
+        <div class="col d-flex justify-content-center">
           <div class="d-flex flex-column justify-content-center align-items-center"
           v-if="isSignIn">
             <SignIn/>
@@ -34,3 +38,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.logo {
+  width: 312.6px;
+}
+</style>

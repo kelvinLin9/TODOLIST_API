@@ -54,7 +54,7 @@
         <button class="btn btn-dark" type="submit">
           註冊帳號
         </button>
-        <button class="btn btn-link" type="button"
+        <button class="btn btn-link text-dark text-decoration-none" type="button"
                 @click="isSignIn = true">
           登入
         </button>

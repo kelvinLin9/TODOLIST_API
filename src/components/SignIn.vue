@@ -30,7 +30,7 @@
         <button class="btn btn-dark" type="submit">
           登入
         </button>
-        <button class="btn btn-link" type="button"
+        <button class="btn btn-link text-dark text-decoration-none" type="button"
               @click="isSignIn = false">
           註冊帳號
         </button>

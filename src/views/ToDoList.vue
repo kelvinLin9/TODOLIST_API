@@ -1,47 +1,49 @@
 <template>
-<div class="bg-main">
-  <div class="p-5 todo">
+<div class="bg-main vh-100">
+  <div class="p-5 container">
     <div class="d-flex justify-content-center align-items-center mb-5">
       <img src="../assets/images/logo.png" alt="logo">
-      <div class="ms-auto fs-16">{{ userNickname }}的待辦</div>
-      <button class="btn" @click="signOut">登出</button>
+      <div class="ms-auto fs-16 d-none d-sm block">{{ userNickname }} 的待辦</div>
+      <a class="fs-16 link-dark ms-auto text-decoration-none" @click.prevent="signOut">登出</a>
     </div>
-    <div class="card input">
-      <input class="text"
-              type="text"
-              placeholder="請輸入待辦事項"
-              v-model="todo" />
-      <button class="btn btn_add" @click="addTodo">+</button>
-    </div>
-    <div class="card card_list">
-    <ul class="tab" @click="getTodos()">
-      <li  :class="{active : todoStatus === 'all'}"
-            @click="todoStatus = 'all'">全部</li>
-      <li  :class="{active : todoStatus === 'work'}"
-            @click="todoStatus = 'work'">待完成</li>
-      <li  :class="{active : todoStatus === 'down'}"
-            @click="todoStatus = 'down'">已完成</li>
-    </ul>
-    <div class="cart_content">
-      <ul class="list">
-        <li v-for="item in afterFilterTodos" :key="item.id">
-          <label class="checkbox" for="" @click="toggleTodo(item.id)">
-            <input type="checkbox" />
-            <span>{{ item.content }}</span>
-          </label>
-          <a href="#" class="edit" @click.prevent="editTodo(item.id)">
-            <font-awesome-icon icon="fa-solid fa-pen" />
-          </a>
-          <a href="#" class="delete" @click.prevent="deleteTodo(item.id)">
-            <font-awesome-icon icon="fa-solid fa-trash" />
-          </a>
-        </li>
-      </ul>
-      <div class="list_footer">
-        <p><span class="todoLength">{{ works }}</span> 個待完成項目</p>
-        <a href="#" class="btn_clear" @click.prevent="clearDowns()">清除已完成項目</a>
+    <div class="row">
+      <div class="input-group mb-3 ">
+        <input class="text col"
+                type="text"
+                placeholder="請輸入待辦事項"
+                v-model="todo" />
+        <span class="btn btn_add" @click="addTodo">+</span>
       </div>
     </div>
+    <div class="card">
+      <ul class="tab px-4" @click="getTodos()">
+        <li  :class="{active : todoStatus === 'all'}"
+              @click="todoStatus = 'all'">全部</li>
+        <li  :class="{active : todoStatus === 'work'}"
+              @click="todoStatus = 'work'">待完成</li>
+        <li  :class="{active : todoStatus === 'down'}"
+              @click="todoStatus = 'down'">已完成</li>
+      </ul>
+      <div class="px-1">
+        <ul class="list">
+          <li v-for="item in afterFilterTodos" :key="item.id">
+            <label class="checkbox" for="" @click="toggleTodo(item.id)">
+              <input type="checkbox" />
+              <span>{{ item.content }}</span>
+            </label>
+            <a href="#" class="edit" @click.prevent="editTodo(item.id)">
+              <font-awesome-icon icon="fa-solid fa-pen" />
+            </a>
+            <a href="#" class="delete" @click.prevent="deleteTodo(item.id)">
+              <font-awesome-icon icon="fa-solid fa-trash" />
+            </a>
+          </li>
+        </ul>
+        <div class="d-flex justify-content-between align-items-center p-3">
+          <div>{{ works }} 個待完成項目</div>
+          <a href="#" class="link-secondary" @click.prevent="clearDowns()">清除已完成項目</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -68,119 +70,11 @@ export default {
 </script>
 
 <style scoped>
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-/* html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-margin: 0;
-padding: 0;
-border: 0;
-font-size: 100%;
-font: inherit;
-vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-/* article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-display: block;
-}
-body {
-line-height: 1;
-}
-ol, ul {
-list-style: none;
-}
-blockquote, q {
-quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-content: '';
-content: none;
-}
-table {
-border-collapse: collapse;
-border-spacing: 0;
-}
-* , *:befor , *:after  {
-box-sizing: border-box;
-/* }  */
-
-/* @import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
-@import url("https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700"); */
-/* * {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.todo {
-  max-width: 1280px;
-} */
-
-/* h1 {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  font-family: "Baloo Tamma 2";
-  letter-spacing: 0.5rem;
-  font-weight: bold;
-}
-@media (max-width: 575px) {
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-} */
-
-.card {
-  margin-bottom: 0.5rem;
-  max-width: 100%;
-  padding: 1rem;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
-}
-
-input[type=text] {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  font-size: 1rem;
-  padding-right: 1rem;
-  color: #333;
-}
-input[type=text]::placeholder {
-  color: #9f9a91;
-}
-
-.input {
-  padding: 4px 4px 4px 1rem;
-  display: flex;
-}
-
 .btn_add {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -188,10 +82,6 @@ input[type=text]::placeholder {
   color: #fff;
   font-size: 2rem;
   text-decoration: none;
-}
-
-.card_list {
-  padding: 0;
 }
 
 .tab {
@@ -204,6 +94,7 @@ input[type=text]::placeholder {
   padding: 1rem;
   width: 100%;
   border-bottom: 2px solid #efefef;
+  list-style-type:none
 }
 .tab li.active {
   border-bottom: 2px solid #333;
@@ -211,18 +102,10 @@ input[type=text]::placeholder {
   font-weight: bold;
 }
 
-.cart_content {
-  padding: 0.5rem 1rem 1rem 1rem;
-}
-@media (max-width: 575px) {
-  .cart_content {
-    padding: 0.5rem 1rem 0.5rem 0.5rem;
-  }
-}
-
 .list li {
   position: relative;
   padding-right: 2rem;
+  list-style-type:none
 }
 @media (max-width: 575px) {
   .list li {
@@ -232,7 +115,7 @@ input[type=text]::placeholder {
 .list li a.delete {
   position: absolute;
   opacity: 0;
-  right: 0;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   text-decoration: none;
@@ -240,9 +123,6 @@ input[type=text]::placeholder {
   display: block;
   width: 1rem;
   height: 1rem;
-  /* background: #000; */
-  /* background-image: url("https://i.imgur.com/7Q4RjFx.jpg"); */
-  /* background-size: contain; */
 }
 @media (max-width: 575px) {
   .list li a.delete {
@@ -258,7 +138,7 @@ input[type=text]::placeholder {
 .list li a.edit {
   position: absolute;
   opacity: 0;
-  right: 30px;
+  right: 50px;
   top: 50%;
   transform: translateY(-50%);
   text-decoration: none;
@@ -276,22 +156,6 @@ input[type=text]::placeholder {
 }
 .list li:hover a.edit {
   opacity: 1;
-}
-.list_footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2rem 1rem 0.5rem;
-  font-size: 14px;
-}
-.list_footer a {
-  color: #9f9a91;
-  text-decoration: none;
-}
-@media (max-width: 575px) {
-  .list_footer {
-    padding: 1.5rem 0 1rem 0.5rem;
-  }
 }
 
 .checkbox {
