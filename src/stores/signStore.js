@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '../router'
-// import statusStore from './statusStore'
 
-// const status = statusStore()
 const apiUrl = 'https://todoo.5xcamp.us'
 
 export default defineStore('signStore', {
@@ -38,11 +36,9 @@ export default defineStore('signStore', {
           this.signInForm.email = ''
           this.signInForm.password = ''
           this.userNickname = res.data.nickname
-          // status.pushManager(res, '登入', '已加入購物車')
           router.push('/ToDoList')
         }).catch((err) => {
           console.log(err)
-          // status.pushManager(err, '登入', '已加入購物車')
         })
     },
     signUp () {
