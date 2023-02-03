@@ -58,6 +58,10 @@ export default defineStore('todoStore', {
       }
     },
     addTodo () {
+      if (this.todo === '') {
+        alert('請輸入代辦事項')
+        return
+      }
       const api = `${apiUrl}/todos`
       axios.post(api, {
         todo: {

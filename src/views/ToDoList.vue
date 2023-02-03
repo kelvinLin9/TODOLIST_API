@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="input-group mb-3 ">
-        <input class="text col"
+        <input class="text col todo-input"
                 type="text"
                 placeholder="請輸入待辦事項"
                 v-model="todo" />
@@ -71,6 +71,14 @@ export default {
   },
   created () {
     this.getTodos()
+  },
+  mounted () {
+    const todoInput = document.querySelector('.todo-input')
+    todoInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        this.addTodo()
+      }
+    })
   }
 }
 </script>
@@ -160,7 +168,6 @@ export default {
 .list li:hover a.edit {
   opacity: 1;
 }
-
 .checkbox {
   position: relative;
   user-select: none;
@@ -180,7 +187,6 @@ export default {
     padding-right: 1rem;
   }
 }
-
 .checkbox input {
   position: absolute;
   top: 0;
@@ -231,5 +237,4 @@ export default {
 .checkbox input:checked ~ span::after {
   opacity: 1;
 }
-
 </style>
