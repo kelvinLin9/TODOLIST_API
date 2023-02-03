@@ -161,7 +161,7 @@ export default {
   opacity: 1;
 }
 
-/* .checkbox {
+.checkbox {
   position: relative;
   user-select: none;
   width: 100%;
@@ -230,6 +230,6 @@ export default {
 }
 .checkbox input:checked ~ span::after {
   opacity: 1;
-} */
+}
 
 </style>
