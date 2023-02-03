@@ -7,7 +7,7 @@ export default defineStore('statusStore', {
   actions: {
     pushManager (res, title = '更新', content = '') {
       console.log(res.status)
-      if (res.status === 201) {
+      if (res.status === 201 || res.status === 200) {
         const obj = {
           style: 'success',
           title: `${title}成功`,

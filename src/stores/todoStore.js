@@ -93,11 +93,11 @@ export default defineStore('todoStore', {
         .then((res) => {
           console.log(res)
           this.updateTodo = ''
-          status.pushManager(res, '編輯', '')
+          status.pushManager(res, '編輯', res.message)
           this.getTodos()
         }).catch((err) => {
           console.log(err)
-          status.pushManager(err, '編輯', '')
+          status.pushManager(err, '編輯', err.message)
         })
     },
     deleteTodo (id) {
@@ -110,11 +110,11 @@ export default defineStore('todoStore', {
       })
         .then((res) => {
           console.log(res)
-          status.pushManager(res, '刪除', '')
+          status.pushManager(res, '刪除', res.message)
           this.getTodos()
         }).catch((err) => {
           console.log(err)
-          status.pushManager(err, '刪除', '')
+          status.pushManager(err, '刪除', err.message)
         })
     },
     toggleTodo (id) {
