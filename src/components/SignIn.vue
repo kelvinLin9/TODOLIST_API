@@ -26,7 +26,7 @@
         </VField>
         <ErrorMessage name="密碼" class="invalid-feedback"/>
       </div>
-      <div class="d-grid gap-2 col-4 mx-auto">
+      <div class="d-grid gap-2 col-6 mx-auto">
         <button class="btn btn-dark" type="submit">
           登入
         </button>
@@ -36,13 +36,23 @@
         </button>
       </div>
     </VForm>
-
   </div>
+  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content fs-20">
+        <div class="modal-body text-white text-center mt-4">
+          哦歐！排序錯誤，請再調整順序
+          <button type="button" class="btn text-white mt-4" data-bs-dismiss="modal">確定</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </template>
 
 <script>
 import { mapState, mapActions, mapWritableState } from 'pinia'
 import signStore from '@/stores/signStore'
+// import Modal from 'bootstrap/js/dist/modal'
 
 export default {
   computed: {
@@ -51,6 +61,38 @@ export default {
   },
   methods: {
     ...mapActions(signStore, ['signIn'])
+  },
+  mounted () {
+    // this.modal = new Modal(this.$refs.modal)
+    // console.log(this.modal)
+    // this.modal.show()
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.modal-content {
+  width: 486px;
+  height: 216px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 30px;
+  background: #000000;
+  border-radius: 20px;
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 301px;
+    height: 58px;
+    background: #9C0700;
+    border-radius: 9px;
+  }
+}
+</style>

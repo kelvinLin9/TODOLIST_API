@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '../router'
 import signStore from './signStore'
+import statusStore from './statusStore'
 
+const status = statusStore()
 const sign = signStore()
 const apiUrl = 'https://todoo.5xcamp.us'
 export default defineStore('todoStore', {
@@ -69,10 +71,11 @@ export default defineStore('todoStore', {
         .then((res) => {
           console.log(res)
           this.todo = ''
+          status.pushManager(res, '新增待辦', res.message)
           this.getTodos()
         }).catch((err) => {
           console.log(err)
-          alert('QQ')
+          status.pushManager(err, '新增待辦', err.message)
         })
     },
     editTodo (id) {
@@ -90,10 +93,11 @@ export default defineStore('todoStore', {
         .then((res) => {
           console.log(res)
           this.updateTodo = ''
+          status.pushManager(res, '編輯', '')
           this.getTodos()
         }).catch((err) => {
           console.log(err)
-          alert('QQ')
+          status.pushManager(err, '編輯', '')
         })
     },
     deleteTodo (id) {
@@ -106,10 +110,11 @@ export default defineStore('todoStore', {
       })
         .then((res) => {
           console.log(res)
+          status.pushManager(res, '刪除', '')
           this.getTodos()
         }).catch((err) => {
           console.log(err)
-          alert('QQ')
+          status.pushManager(err, '刪除', '')
         })
     },
     toggleTodo (id) {

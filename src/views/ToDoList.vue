@@ -27,8 +27,9 @@
       <div class="px-1">
         <ul class="list">
           <li v-for="item in afterFilterTodos" :key="item.id">
-            <label class="checkbox" for="" @click="toggleTodo(item.id)">
-              <input type="checkbox" />
+            <label class="checkbox">
+              <input type="checkbox" :checked = item.completed_at
+                      @click="toggleTodo(item.id)"/>
               <span>{{ item.content }}</span>
             </label>
             <a href="#" class="edit" @click.prevent="editTodo(item.id)">
@@ -47,14 +48,19 @@
     </div>
   </div>
 </div>
+<ToastMessages/>
 </template>
 
 <script>
+import ToastMessages from '@/components/ToastMessages.vue'
 import { mapActions, mapWritableState } from 'pinia'
 import signStore from '@/stores/signStore'
 import todoStore from '@/stores/todoStore'
 
 export default {
+  components: {
+    ToastMessages
+  },
   computed: {
     ...mapWritableState(todoStore, ['todo', 'afterFilterTodos', 'todoStatus', 'works']),
     ...mapWritableState(signStore, ['userNickname'])
@@ -83,7 +89,6 @@ export default {
   font-size: 2rem;
   text-decoration: none;
 }
-
 .tab {
   display: flex;
   text-align: center;
@@ -101,7 +106,6 @@ export default {
   color: #333;
   font-weight: bold;
 }
-
 .list li {
   position: relative;
   padding-right: 2rem;
@@ -134,7 +138,6 @@ export default {
 .list li:hover a.delete {
   opacity: 1;
 }
-
 .list li a.edit {
   position: absolute;
   opacity: 0;
@@ -158,7 +161,7 @@ export default {
   opacity: 1;
 }
 
-.checkbox {
+/* .checkbox {
   position: relative;
   user-select: none;
   width: 100%;
@@ -177,6 +180,7 @@ export default {
     padding-right: 1rem;
   }
 }
+
 .checkbox input {
   position: absolute;
   top: 0;
@@ -226,6 +230,6 @@ export default {
 }
 .checkbox input:checked ~ span::after {
   opacity: 1;
-}
+} */
 
 </style>
